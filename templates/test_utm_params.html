@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my fancy utms</title>
+</head>
+<body>
+WELCOME TO UTM
+
+<form action="/" method="post">
+  First name:<br>
+  <input type="text" name="firstname" value="Mickey"><br>
+  <input type="hidden" name="utmstuff" value="JSError" id="smartUTMJarHiddenField"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+
+<script src={{ url_for('static', filename='SmartUTMJar.js') }}></script>
+</html>
