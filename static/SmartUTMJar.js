@@ -9,7 +9,7 @@ function isAdRelevantVisit() {
 
 function visitedDate() {
     var d = new Date();
-    return d.getUTCDate() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCFullYear() + "T" + d.getUTCHours() + ":" + d.getUTCMinutes() + ":00Z";
+    return d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate() + "T" + d.getUTCHours() + ":" + d.getUTCMinutes() + ":00Z";
 
 }
 
