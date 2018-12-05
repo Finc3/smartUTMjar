@@ -17,7 +17,7 @@ The repository contains a python webserver which can be started with: **python u
 You will find the webserver on http://localhost:5003 and you can play around with utm prameters.
 * An example URL: http://localhost:5003/?utm_source=google&utm_medium=email&utm_campaign=december_2018 .
 When you submit your form the webserver will output something like this on the command line:
-`** INFO in utmparams: Got UTM Parameter: [2018-12-05 11:23:40,727] INFO in utmparams: Got UTM Parameter: ImmutableMultiDict([('firstname', 'Mickey'), ('utmstuff', '[{"utm_source":"google","utm_medium":"email","utm_campaign":"december_2018","visit":"5-12-2018T10:11:00Z"},{"gclid":"lalala","visit":"5-12-2018T10:10:00Z"}]'), ('firstVisit', 'lalala'), ('firstVisitTime', '5-12-2018T10:10:00Z')])
+`** Got UTM Parameter: ImmutableMultiDict([('firstname', 'Mickey'), ('utmstuff', '[{"utm_source":"google","utm_medium":"email","utm_campaign":"december_2018","visit":"5-12-2018T10:11:00Z"},{"gclid":"lalala","visit":"5-12-2018T10:10:00Z"}]'), ('firstVisit', 'lalala'), ('firstVisitTime', '5-12-2018T10:10:00Z')])*`
 
 ## The format for BI/Analytics Tools?
 
