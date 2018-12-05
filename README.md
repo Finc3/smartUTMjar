@@ -15,11 +15,12 @@ When a user opens the site with the form the script tries to fill every hidden f
 
 The repository contains a python webserver which can be started with: **python utmparams.py**.
 You will find the webserver on http://localhost:5003 and you can play around with utm prameters.
-An example URL: http://localhost:5003/?utm_source=google&utm_medium=email&utm_campaign=december_2018 . When you submit your form the webserver will output something like this on the command line:
-** INFO in utmparams: Got UTM Parameter: ImmutableMultiDict([('firstname', 'Chris'), ('utmstuff', 'utm_source=google|utm_medium=email|utm_campaign=december_2018|visit=4-12-2018-12-16')])**
+* An example URL: http://localhost:5003/?utm_source=google&utm_medium=email&utm_campaign=december_2018 .
+When you submit your form the webserver will output something like this on the command line:
+`** INFO in utmparams: Got UTM Parameter: ImmutableMultiDict([('firstname', 'Chris'), ('utmstuff', 'utm_source=google|utm_medium=email|utm_campaign=december_2018|visit=4-12-2018-12-16')])**`
 
 ## The format for BI/Analytics Tools?
 
-The format is JSON. The history will be transmitted as a ordered json list. The first visit is the last element in the list.
-**smujarFirstVisit** -> is a string with the campaing/clickId
-**smujarFirstVisitTime** -> timestring in the format: YYYY-MM-DDTHH:MM:00Z. Timezone is always in UTC
+* The format is JSON. The history will be transmitted as a ordered json list. The first visit is the last element in the list.
+* **smujarFirstVisit** -> is a string with the campaing/clickId
+* **smujarFirstVisitTime** -> timestring in the format: YYYY-MM-DDTHH:MM:00Z. Timezone is always in UTC
