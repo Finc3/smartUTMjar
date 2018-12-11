@@ -24,3 +24,9 @@ When you submit your form the webserver will output something like this on the c
 * The format is JSON. The history will be transmitted as a ordered json list. The first visit is the last element in the list.
 * **smujarFirstVisit** -> is a string with the campaing/clickId
 * **smujarFirstVisitTime** -> timestring in the format: YYYY-MM-DTHH:MM:00Z. Timezone is always in UTC
+
+
+## Disable Cookies
+
+If a user does not allow tracking cookies the cookie needs to be disabled. There is a function which provides this
+kind of functionality. Add: `disableSmujarCookie()` anywhere to disable the tracking.

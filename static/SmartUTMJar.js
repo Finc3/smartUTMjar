@@ -89,7 +89,7 @@ function maintainLength() {
 
 }
 
-function disableCookie() {
+function disableSmujarCookie() {
     document.cookie = "smartUTMJar=DoNotTrack";
     hf = document.getElementById("smujarFirstVisit");
     if (hf) hf.value = "";
