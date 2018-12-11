@@ -77,9 +77,26 @@ function fillUTMJarField() {
     }
 }
 
-if (isAdRelevantVisit()) {
+function disableCookie() {
+    document.cookie = "smartUTMJar=DoNotTrack";
+    hf = document.getElementById("smujarFirstVisit");
+    if (hf) hf.value = "";
+    hf = document.getElementById("smujarHistory");
+    if (hf) hf.value = "";
+    hf = document.getElementById("smujarFirstVisitTime");
+    if (hf) hf.value = "";
+}
+
+function trackEnabled() {
+    return getCookie("smartUTMJar") != "DoNotTrack";
+}
+
+if (isAdRelevantVisit() && trackEnabled()) {
     params = extractParameters();
     writeCookieWithUTMParams(parametersToString(params));
 }
 
-fillUTMJarField();
+if (trackEnabled()) {
+    fillUTMJarField();
+}
+
