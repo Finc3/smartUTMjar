@@ -77,6 +77,18 @@ function fillUTMJarField() {
     }
 }
 
+function maintainLength() {
+
+    if (document.cookie.indexOf("smartUTMJar=") >= 0) {
+        lastCookieValue = JSON.parse(getCookie("smartUTMJar"));
+        if (lastCookieValue.length > 20) {
+            cookieValue= lastCookieValue.slice(lastCookieValue.length-1, lastCookieValue.length);
+            document.cookie = "smartUTMJar=".concat(JSON.stringify(cookieValue))
+        }
+    }
+
+}
+
 function disableCookie() {
     document.cookie = "smartUTMJar=DoNotTrack";
     hf = document.getElementById("smujarFirstVisit");
@@ -97,6 +109,7 @@ if (isAdRelevantVisit() && trackEnabled()) {
 }
 
 if (trackEnabled()) {
+    maintainLength();
     fillUTMJarField();
 }
 
