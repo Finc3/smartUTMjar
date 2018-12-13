@@ -26,7 +26,8 @@ function extractParameters() {
 function parametersToString(params) {
     var result = {};
     Object.keys(params).forEach(function (key) {
-        if (key === "utm_source" || key === "utm_medium" || key === "utm_campaign" || key === "gclid") {
+        if (key === "utm_source" || key === "utm_medium" || key === "utm_campaign"
+            || key === "utm_term" || key === "utm_content" || key === "gclid") {
             result[key] = params[key];
         }
         else if (document.referrer.includes("google.com") || document.referrer.includes("bing.com")) {
