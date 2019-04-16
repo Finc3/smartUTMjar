@@ -50,10 +50,16 @@ function writeCookieWithUTMParams(params) {
 function fillUTMJarField() {
     if (document.cookie.indexOf("smartUTMJar=") >= 0) {
         hf = document.getElementById("smujarHistory");
+        if (!hf) {
+            hf = document.getElementsByName("smujarHistory")[0];
+        }
         if (hf) {
             hf.value = getCookie("smartUTMJar");
         }
         hf = document.getElementById("smujarFirstVisit");
+        if (!hf) {
+            hf = document.getElementsByName("smujarFirstVisit")[0];
+        }
         if (hf) {
             var cookie = JSON.parse(getCookie("smartUTMJar"));
             var utms = cookie[cookie.length - 1].utm_source;
@@ -73,6 +79,9 @@ function fillUTMJarField() {
             hf.value = fieldval;
         }
         hf = document.getElementById("smujarFirstVisitTime");
+        if (!hf) {
+            hf = document.getElementsByName("smujarFirstVisitTime")[0];
+        }
         if (hf) {
             var cookie = JSON.parse(getCookie("smartUTMJar"));
             hf.value = cookie[cookie.length - 1].visit;
@@ -100,6 +109,13 @@ function disableSmujarCookie() {
     if (hf) hf.value = "";
     hf = document.getElementById("smujarFirstVisitTime");
     if (hf) hf.value = "";
+
+    hf = document.getElementsByName("smujarFirstVisit");
+    if (hf.length > 0) hf[0].value = "";
+    hf = document.getElementsByName("smujarHistory");
+    if (hf.length > 0) hf[0].value = "";
+    hf = document.getElementsByName("smujarFirstVisitTime");
+    if (hf.length > 0) hf[0].value = "";
 }
 
 function trackEnabled() {
