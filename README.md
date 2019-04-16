@@ -5,7 +5,7 @@ this is a script collection that stores utm parameters in cooke and offers a ser
 ## How to use it?
 
 There is the scrip SmartUTMJar.js. This script should be added to every webpage where you want to catch UTM/gclid parameters or organic search parameters.
-The script writes a cookie with your parameters or your google referrer. Your forms on your website should contain three hidden fields with the ids or names (e.g <input name="smujarHistory">):
+The script writes a cookie with your parameters or your google referrer. Your forms on your website should contain three hidden fields with the ids or names (e.g `** <input name="smujarHistory"> **`):
 * **smujarHistory** -> the full history of visits in handy json format
 * **smujarFirstVisit** -> the campagne/clickid for the first visit
 * **smujarFirstVisitTime** -> the timestamp for the first visit
