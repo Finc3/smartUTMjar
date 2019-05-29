@@ -65,6 +65,7 @@ function fillUTMJarField() {
             var utms = cookie[cookie.length - 1].utm_source;
             var utmm = cookie[cookie.length - 1].utm_medium;
             var gclid = cookie[cookie.length - 1].gclid;
+            var utmc = cookie[cookie.length - 1].utm_campaign;
             var fieldval = "";
             if (utms) {
                 fieldval += utms
@@ -73,8 +74,13 @@ function fillUTMJarField() {
                 if (utms) fieldval += "-";
                 fieldval += utmm
             }
-            if (gclid) {
+            if (utmc) {
+                if (utms || utmm) fieldval += "-";
                 fieldval += gclid
+            }
+            if (gclid) {
+                if (utms || utmm || utmc) fieldval += "-";
+                fieldval += utmc
             }
             hf.value = fieldval;
         }
