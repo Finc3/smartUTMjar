@@ -22,7 +22,7 @@ When you submit your form the webserver will output something like this on the c
 ## The format for BI/Analytics Tools?
 
 * The format is JSON. The history will be transmitted as a ordered json list. The first visit is the last element in the list.
-* **smujarFirstVisit** -> is a string with the campaing/clickId
+* **smujarFirstVisit** -> is a string with the campaing/clickId. The format is: utm_source-utm_medium-utm_campaign-gclid
 * **smujarFirstVisitTime** -> timestring in the format: YYYY-MM-DTHH:MM:00Z. Timezone is always in UTC
 
 
