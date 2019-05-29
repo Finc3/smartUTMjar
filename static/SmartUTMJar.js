@@ -76,11 +76,11 @@ function fillUTMJarField() {
             }
             if (utmc) {
                 if (utms || utmm) fieldval += "-";
-                fieldval += gclid
+                fieldval += utmc
             }
             if (gclid) {
                 if (utms || utmm || utmc) fieldval += "-";
-                fieldval += utmc
+                fieldval += gclid
             }
             hf.value = fieldval;
         }
