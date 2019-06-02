@@ -27,7 +27,7 @@ function parametersToString(params) {
     var result = {};
     Object.keys(params).forEach(function (key) {
         if (key === "utm_source" || key === "utm_medium" || key === "utm_campaign"
-            || key === "utm_term" || key === "utm_content" || key === "gclid") {
+            || key === "utm_term" || key === "utm_content" || key === "gclid" || key === "utm_content" || key === "utm_term") {
             result[key] = params[key];
         }
         else if (document.referrer.includes("google.com") || document.referrer.includes("bing.com")) {
@@ -66,23 +66,11 @@ function fillUTMJarField() {
             var utmm = cookie[cookie.length - 1].utm_medium;
             var gclid = cookie[cookie.length - 1].gclid;
             var utmc = cookie[cookie.length - 1].utm_campaign;
-            var fieldval = "";
-            if (utms) {
-                fieldval += utms
-            }
-            if (utmm) {
-                if (utms) fieldval += "-";
-                fieldval += utmm
-            }
-            if (utmc) {
-                if (utms || utmm) fieldval += "-";
-                fieldval += utmc
-            }
-            if (gclid) {
-                if (utms || utmm || utmc) fieldval += "-";
-                fieldval += gclid
-            }
-            hf.value = fieldval;
+            var utmcontent = cookie[cookie.length - 1].utm_content;
+            var utmterm = cookie[cookie.length - 1].utm_term;
+
+            hf.value = (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || '');
+
         }
         hf = document.getElementById("smujarFirstVisitTime");
         if (!hf) {
