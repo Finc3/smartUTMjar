@@ -116,13 +116,17 @@ function trackEnabled() {
     return getCookie("smartUTMJar") != "DoNotTrack";
 }
 
-if (isAdRelevantVisit() && trackEnabled()) {
+
+window.addEventListener("load", function(){
+    if (isAdRelevantVisit() && trackEnabled()) {
     params = extractParameters();
     writeCookieWithUTMParams(parametersToString(params));
-}
+    }
 
-if (trackEnabled()) {
+    if (trackEnabled()) {
     maintainLength();
     fillUTMJarField();
 }
+});
+
 
