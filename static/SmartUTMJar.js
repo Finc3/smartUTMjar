@@ -23,7 +23,7 @@ function extractParameters() {
     return result;
 }
 
-function parametersToString(params) {
+function extractCampaignParameters(params) {
     var result = {};
     Object.keys(params).forEach(function (key) {
         if (key === "utm_source" || key === "utm_medium" || key === "utm_campaign"
@@ -125,7 +125,7 @@ function trackEnabled() {
 
 window.addEventListener("load", function(){
     if (isAdRelevantVisit() && trackEnabled()) {
-        writeCookieWithUTMParams(parametersToString(extractParameters()));
+        writeCookieWithUTMParams(extractCampaignParameters(extractParameters()));
     }
 
     if (trackEnabled()) {
