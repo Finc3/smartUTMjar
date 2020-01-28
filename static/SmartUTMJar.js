@@ -30,10 +30,16 @@ function parametersToString(params) {
             || key === "utm_term" || key === "utm_content" || key === "gclid" || key === "utm_content" || key === "utm_term") {
             result[key] = params[key];
         }
-        else if (document.referrer.includes("google.com") || document.referrer.includes("bing.com")) {
-            result = {"utm_source": "organic"};
-        }
     });
+    if (Object.keys(result).length === 0) {
+
+        if (document.referrer.includes("google.com")) {
+            result = {"utm_source": "google", "utm_medium": "organic"};
+        }
+        else if (document.referrer.includes("bing.com")) {
+            result = {"utm_source": "bing", "utm_medium": "organic"};
+        }
+    }
     result.visit = visitedDate();
     return result;
 }
