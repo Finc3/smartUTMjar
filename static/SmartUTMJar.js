@@ -125,8 +125,7 @@ function trackEnabled() {
 
 window.addEventListener("load", function(){
     if (isAdRelevantVisit() && trackEnabled()) {
-    params = extractParameters();
-    writeCookieWithUTMParams(parametersToString(params));
+        writeCookieWithUTMParams(parametersToString(extractParameters()));
     }
 
     if (trackEnabled()) {
