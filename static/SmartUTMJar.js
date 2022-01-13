@@ -39,8 +39,13 @@ function extractCampaignParameters(params) {
         else if (document.referrer.includes("bing.com")) {
             result = {"utm_source": "bing", "utm_medium": "organic"};
         }
+        else {
+            result = {"utm_source": "others", "utm_medium": "organic"};
+        }
     }
     result.visit = visitedDate();
+    result.referrer = document.referrer;
+    result.landingPage = location.href.substr(0).split("?")[0];
     return result;
 }
 
@@ -53,39 +58,65 @@ function writeCookieWithUTMParams(params) {
     document.cookie = "smartUTMJar=".concat(JSON.stringify(cookieValue))
 }
 
+function fillFieldWithValue(fieldName, fieldValue) {
+    try {
+    let hf = document.getElementById(fieldName);
+    if (!hf) {
+        hf = document.getElementsByName(fieldName)[0];
+    }
+    if (hf) {
+        hf.value = fieldValue || '';
+    }
+    }
+    catch (e) {
+        console.log("Did not find field " + fieldName + ". skipping...")
+    }
+}
+
 function fillUTMJarField() {
     if (document.cookie.indexOf("smartUTMJar=") >= 0) {
-        hf = document.getElementById("smujarHistory");
-        if (!hf) {
-            hf = document.getElementsByName("smujarHistory")[0];
-        }
-        if (hf) {
-            hf.value = getCookie("smartUTMJar");
-        }
-        hf = document.getElementById("smujarFirstVisit");
-        if (!hf) {
-            hf = document.getElementsByName("smujarFirstVisit")[0];
-        }
-        if (hf) {
-            var cookie = JSON.parse(getCookie("smartUTMJar"));
-            var utms = cookie[cookie.length - 1].utm_source;
-            var utmm = cookie[cookie.length - 1].utm_medium;
-            var gclid = cookie[cookie.length - 1].gclid;
-            var utmc = cookie[cookie.length - 1].utm_campaign;
-            var utmcontent = cookie[cookie.length - 1].utm_content;
-            var utmterm = cookie[cookie.length - 1].utm_term;
 
-            hf.value = (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || '');
+        let cookie = JSON.parse(getCookie("smartUTMJar"));
+        let utms = cookie[cookie.length - 1].utm_source;
+        let utmm = cookie[cookie.length - 1].utm_medium;
+        let gclid = cookie[cookie.length - 1].gclid;
+        let utmc = cookie[cookie.length - 1].utm_campaign;
+        let utmcontent = cookie[cookie.length - 1].utm_content;
+        let utmterm = cookie[cookie.length - 1].utm_term;
+        let firstVisitTime = cookie[cookie.length - 1].visit;
+        let referrer = cookie[cookie.length - 1].referrer;
+        let landingPage = cookie[cookie.length - 1].landingPage;
 
-        }
-        hf = document.getElementById("smujarFirstVisitTime");
-        if (!hf) {
-            hf = document.getElementsByName("smujarFirstVisitTime")[0];
-        }
-        if (hf) {
-            var cookie = JSON.parse(getCookie("smartUTMJar"));
-            hf.value = cookie[cookie.length - 1].visit;
-        }
+        fillFieldWithValue("smujarHistory", getCookie("smartUTMJar"));
+        fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || ''))
+        fillFieldWithValue("smujarFirstVisitTime", firstVisitTime);
+
+        fillFieldWithValue("smujarCurrentUTMSource", utms);
+        fillFieldWithValue("smujarCurrentUTMMedium", utmm);
+        fillFieldWithValue("smujarCurrentUTMCampaign", utmc);
+        fillFieldWithValue("smujarCurrentUTMContent", utmcontent);
+        fillFieldWithValue("smujarCurrentUTMTerm", utmterm);
+
+        fillFieldWithValue("smujarCurrentLandingPage", landingPage);
+        fillFieldWithValue("smujarCurrentReferrer", referrer);
+
+        let first_utms = cookie[0].utm_source;
+        let first_utmm = cookie[0].utm_medium;
+        let first_gclid = cookie[0].gclid;
+        let first_utmc = cookie[0].utm_campaign;
+        let first_utmcontent = cookie[0].utm_content;
+        let first_utmterm = cookie[0].utm_term;
+        let first_landingpage = cookie[0].landingPage;
+        let first_referrer = cookie[0].referrer;
+
+        fillFieldWithValue("smujarFirstUTMSource", first_utms);
+        fillFieldWithValue("smujarFirstUTMMedium", first_utmm);
+        fillFieldWithValue("smujarFirstUTMCampaign", first_utmc);
+        fillFieldWithValue("smujarFirstUTMContent", first_utmcontent);
+        fillFieldWithValue("smujarFirstUTMTerm", first_utmterm);
+
+        fillFieldWithValue("smujarFirstLandingPage", first_landingpage);
+        fillFieldWithValue("smujarFirstReferrer", first_referrer);
     }
 }
 
@@ -103,35 +134,33 @@ function maintainLength() {
 
 function disableSmujarCookie() {
     document.cookie = "smartUTMJar=DoNotTrack";
-    hf = document.getElementById("smujarFirstVisit");
-    if (hf) hf.value = "";
-    hf = document.getElementById("smujarHistory");
-    if (hf) hf.value = "";
-    hf = document.getElementById("smujarFirstVisitTime");
-    if (hf) hf.value = "";
+    fillFieldWithValue("smujarHistory", "");
+    fillFieldWithValue("smujarFirstVisit", "");
+    fillFieldWithValue("smujarFirstVisitTime", "");
 
-    hf = document.getElementsByName("smujarFirstVisit");
-    if (hf.length > 0) hf[0].value = "";
-    hf = document.getElementsByName("smujarHistory");
-    if (hf.length > 0) hf[0].value = "";
-    hf = document.getElementsByName("smujarFirstVisitTime");
-    if (hf.length > 0) hf[0].value = "";
+    fillFieldWithValue("smujarCurrentUTMSource", "");
+    fillFieldWithValue("smujarCurrentUTMMedium", "");
+    fillFieldWithValue("smujarCurrentUTMCampaing", "");
+    fillFieldWithValue("smujarCurrentUTMContent", "");
+    fillFieldWithValue("smujarCurrentUTMTerm", "");
 }
 
 function trackEnabled() {
     return getCookie("smartUTMJar") != "DoNotTrack";
 }
 
-
-window.addEventListener("load", function(){
+function runSmartUTMJar() {
     if (isAdRelevantVisit() && trackEnabled()) {
         writeCookieWithUTMParams(extractCampaignParameters(extractParameters()));
     }
-
     if (trackEnabled()) {
     maintainLength();
     fillUTMJarField();
 }
-});
+}
+
+runSmartUTMJar();
+
+
 
 
