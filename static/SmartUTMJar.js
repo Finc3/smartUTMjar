@@ -60,7 +60,7 @@ function writeCookieWithUTMParams(params) {
 
 function fillFieldWithValue(fieldName, fieldValue) {
     try {
-    let hf = document.getElementById(fieldName);
+    var hf = document.getElementById(fieldName);
     if (!hf) {
         hf = document.getElementsByName(fieldName)[0];
     }
@@ -76,16 +76,16 @@ function fillFieldWithValue(fieldName, fieldValue) {
 function fillUTMJarField() {
     if (document.cookie.indexOf("smartUTMJar=") >= 0) {
 
-        let cookie = JSON.parse(getCookie("smartUTMJar"));
-        let utms = cookie[cookie.length - 1].utm_source;
-        let utmm = cookie[cookie.length - 1].utm_medium;
-        let gclid = cookie[cookie.length - 1].gclid;
-        let utmc = cookie[cookie.length - 1].utm_campaign;
-        let utmcontent = cookie[cookie.length - 1].utm_content;
-        let utmterm = cookie[cookie.length - 1].utm_term;
-        let firstVisitTime = cookie[cookie.length - 1].visit;
-        let referrer = cookie[cookie.length - 1].referrer;
-        let landingPage = cookie[cookie.length - 1].landingPage;
+        var cookie = JSON.parse(getCookie("smartUTMJar"));
+        var utms = cookie[cookie.length - 1].utm_source;
+        var utmm = cookie[cookie.length - 1].utm_medium;
+        var gclid = cookie[cookie.length - 1].gclid;
+        var utmc = cookie[cookie.length - 1].utm_campaign;
+        var utmcontent = cookie[cookie.length - 1].utm_content;
+        var utmterm = cookie[cookie.length - 1].utm_term;
+        var firstVisitTime = cookie[cookie.length - 1].visit;
+        var referrer = cookie[cookie.length - 1].referrer;
+        var landingPage = cookie[cookie.length - 1].landingPage;
 
         fillFieldWithValue("smujarHistory", getCookie("smartUTMJar"));
         fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || ''))
@@ -100,14 +100,13 @@ function fillUTMJarField() {
         fillFieldWithValue("smujarCurrentLandingPage", landingPage);
         fillFieldWithValue("smujarCurrentReferrer", referrer);
 
-        let first_utms = cookie[0].utm_source;
-        let first_utmm = cookie[0].utm_medium;
-        let first_gclid = cookie[0].gclid;
-        let first_utmc = cookie[0].utm_campaign;
-        let first_utmcontent = cookie[0].utm_content;
-        let first_utmterm = cookie[0].utm_term;
-        let first_landingpage = cookie[0].landingPage;
-        let first_referrer = cookie[0].referrer;
+        var first_utms = cookie[0].utm_source;
+        var first_utmm = cookie[0].utm_medium;
+        var first_utmc = cookie[0].utm_campaign;
+        var first_utmcontent = cookie[0].utm_content;
+        var first_utmterm = cookie[0].utm_term;
+        var first_landingpage = cookie[0].landingPage;
+        var first_referrer = cookie[0].referrer;
 
         fillFieldWithValue("smujarFirstUTMSource", first_utms);
         fillFieldWithValue("smujarFirstUTMMedium", first_utmm);
