@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=["POST", "GET"])
-def hello_world():
+def print_form_results():
     if request.method == "POST":
         app.logger.info("Got UTM Parameter: "+str(request.form))
         return redirect("/")
