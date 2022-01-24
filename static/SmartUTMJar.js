@@ -55,7 +55,7 @@ function writeCookieWithUTMParams(params) {
         lastCookieValue = JSON.parse(getCookie("smartUTMJar"));
         cookieValue = cookieValue.concat(lastCookieValue);
     }
-    document.cookie = "smartUTMJar=".concat(JSON.stringify(cookieValue))
+    document.cookie = "smartUTMJar=".concat(JSON.stringify(cookieValue)).concat("; path=/; max-age=15552000; secure=true")
 }
 
 function fillFieldWithValue(fieldName, fieldValue) {
