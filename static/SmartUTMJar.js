@@ -4,7 +4,12 @@ window.getCookie = function (name) {
 };
 
 function isAdRelevantVisit() {
-    return !document.referrer.includes(location.host.match(/[\w-]*\.\w*$/)[0])
+    var domainMatch = location.host.match(/[\w-]*\.\w*$/);
+    if (domainMatch && domainMatch.length > 0) {
+        return !document.referrer.includes(domainMatch[0])
+    }
+    return true;
+    
 }
 
 function visitedDate() {
@@ -37,7 +42,6 @@ function extractCampaignParameters(params) {
         var searchEngineFound = false;
         var i = 0;
         while (!searchEngineFound && i < searchEngineDomains.length) {
-            console.log(searchEngineDomains[i]);
             searchEngineFound = cleanedReferrer.includes(searchEngineDomains[i]);
             i++;
         }
