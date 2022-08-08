@@ -1,6 +1,9 @@
 ## smartUTMjar
 
-this is a script collection that stores utm parameters in cookie and offers a service to add them into a hidden field of a html form for submission into i.e. a CRM system.
+This is a script collection that stores utm parameters in cookie and offers a service to add them into a hidden field of a html form for submission into i.e. a CRM system.
+All visits are recorded (if properly integrated with cookie consent). The top 6 search engines are explicitly marked as organic traffic. All other visits are recorded as "referrer" with the host from which the user visited your website. 
+Besides utm parameters, the script also records the google click id, facebook click id and linkedin click id. This might be helpful for offline conversions (For example you have a dedicated sales process after signup).
+This tool helps you to track your ad revelant and analytics relevant traffic throughout your whole tool stack and not only on your website.
 
 ## How to use it?
 
@@ -11,20 +14,26 @@ The script writes a cookie with your parameters or your google referrer. Your fo
 * **smujarFirstVisitTime** -> the timestamp for the first visit
 
 There are more parameters that can be used. Those parameters split into current and first parameters. Current fields are filled with LastTouch values and First fields are filled with the first recorded parameters from a visit.
-* **smujarCurrentUTMSource** -> UTM Source
-* **smujarCurrentUTMMedium** -> UTM Medium
-* **smujarCurrentUTMCampaign** -> UTM Campaign
-* **smujarCurrentUTMContent** -> UTM Content
-* **smujarCurrentUTMTerm** -> UTM Term
-* **smujarCurrentLandingPage** -> Landingpage in: Current URL in the location
-* **smujarCurrentReferrer** -> Current referrer
-* **smujarFirstUTMSource** -> First recorded UTM Source
-* **smujarFirstUTMMedium** -> First recorded UTM Medium
-* **smujarFirstUTMCampaign** -> First recorded UTM Campaign
-* **smujarFirstUTMContent** -> First recorded UTM Content
-* **smujarFirstUTMTerm** -> First recorded UTM Term
-* **smujarFirstLandingPage** -> First recorded Landingpage in: Current URL in the location
-* **smujarFirstReferrer** -> First recorded referrer
+
+ Field name   | Desctiption   |
+ :-----------: | :------------|
+ **smujarCurrentUTMSource** | UTM Source |
+ **smujarCurrentUTMMedium** | UTM Medium |
+ **smujarCurrentUTMCampaign** | UTM Campaign |
+ **smujarCurrentUTMContent** | UTM Content |
+ **smujarCurrentUTMTerm** | UTM Term |
+ **smujarCurrentLandingPage** | Landingpage in: Current URL in the location |
+ **smujarCurrentReferrer** | Current referrer |
+ **smujarCurrentGclid** | Current google click id |
+ **smujarCurrentLiFatId** | Current linkedin click id |
+ **smujarCurrentFBclid** | Current facebook click id |
+ **smujarFirstUTMSource** | First recorded UTM Source |
+ **smujarFirstUTMMedium** | First recorded UTM Medium |
+ **smujarFirstUTMCampaign** | First recorded UTM Campaign |
+ **smujarFirstUTMContent** | First recorded UTM Content |
+ **smujarFirstUTMTerm** | First recorded UTM Term |
+ **smujarFirstLandingPage** | First recorded Landingpage in: Current URL in the location |
+ **smujarFirstReferrer** | First recorded referrer |
 
 
 When a user opens the site with the form the script tries to fill every hidden field with the ids: **smujarFirstVisitTime**, **smujarFirstVisit**, **smujarHistory**. On submit the data is transferred but the cookie will still remain in the users cookie jar.
@@ -54,3 +63,8 @@ kind of functionality. Add: `disableSmujarCookie()` anywhere to disable the trac
 The script should be deployed in its own tag and be called with specific datalayer pushes (For example cookie consent)
 This script is meant to be used with the Google Tag Manager. The reason is: Cookie consent can easily be managed with the tag manager. 
 Everytime a successful consent was given a dataLayer is pushed and therefore the script executed.
+
+## Help with your actionable analytics?
+
+We at Finc3 are happy to help you with Actionable Analytics. Just visit our website and get in touch with us.
+[Get in touch with Finc3](https://www.finc3.com/#contact?utm_source=github&utm_campaign=smartutmjar "Finc3 Contact!")

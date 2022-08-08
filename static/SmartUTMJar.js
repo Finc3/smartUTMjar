@@ -4,13 +4,12 @@ window.getCookie = function (name) {
 };
 
 function isAdRelevantVisit() {
-    return document.referrer.includes("google.com") || document.referrer.includes("bing.com") || location.search.includes("utm_source") || location.search.includes("gclid")
+    return !document.referrer.includes(location.host.match(/[\w-]*\.\w*$/)[0])
 }
 
 function visitedDate() {
     var d = new Date();
     return d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate() + "T" + d.getUTCHours() + ":" + d.getUTCMinutes() + ":00Z";
-
 }
 
 function extractParameters() {
@@ -25,22 +24,28 @@ function extractParameters() {
 
 function extractCampaignParameters(params) {
     var result = {};
+
     Object.keys(params).forEach(function (key) {
         if (key === "utm_source" || key === "utm_medium" || key === "utm_campaign"
-            || key === "utm_term" || key === "utm_content" || key === "gclid" || key === "utm_content" || key === "utm_term") {
+            || key === "utm_term" || key === "utm_content" || key === "gclid" || key === "utm_content" || key === "utm_term" || key === "li_fat_id" || key === "fbclid") {
             result[key] = params[key];
         }
     });
     if (Object.keys(result).length === 0) {
-
-        if (document.referrer.includes("google.com")) {
-            result = {"utm_source": "google", "utm_medium": "organic"};
+        var searchEngineDomains = ["google.", "bing.", "baidu.", "yahoo.", "ask.", "duckduckgo."]
+        var cleanedReferrer = document.referrer.replace("https://", "").replace("/","");
+        var searchEngineFound = false;
+        var i = 0;
+        while (!searchEngineFound && i < searchEngineDomains.length) {
+            console.log(searchEngineDomains[i]);
+            searchEngineFound = cleanedReferrer.includes(searchEngineDomains[i]);
+            i++;
         }
-        else if (document.referrer.includes("bing.com")) {
-            result = {"utm_source": "bing", "utm_medium": "organic"};
+        if (searchEngineFound) {
+            result = {"utm_source": cleanedReferrer, "utm_medium": "organic"};
         }
         else {
-            result = {"utm_source": "others", "utm_medium": "organic"};
+            result = {"utm_source": cleanedReferrer, "utm_medium": "referral"};
         }
     }
     result.visit = visitedDate();
@@ -80,6 +85,9 @@ function fillUTMJarField() {
         var utms = cookie[cookie.length - 1].utm_source;
         var utmm = cookie[cookie.length - 1].utm_medium;
         var gclid = cookie[cookie.length - 1].gclid;
+        var li_fat_id = cookie[cookie.length - 1].li_fat_id;
+        var fbclid = cookie[cookie.length - 1].fbclid;
+
         var utmc = cookie[cookie.length - 1].utm_campaign;
         var utmcontent = cookie[cookie.length - 1].utm_content;
         var utmterm = cookie[cookie.length - 1].utm_term;
@@ -88,7 +96,7 @@ function fillUTMJarField() {
         var landingPage = cookie[cookie.length - 1].landingPage;
 
         fillFieldWithValue("smujarHistory", getCookie("smartUTMJar"));
-        fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || ''))
+        fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || '')) + (("-"+li_fat_id) || '')
         fillFieldWithValue("smujarFirstVisitTime", firstVisitTime);
 
         fillFieldWithValue("smujarCurrentUTMSource", utms);
@@ -116,6 +124,10 @@ function fillUTMJarField() {
 
         fillFieldWithValue("smujarFirstLandingPage", first_landingpage);
         fillFieldWithValue("smujarFirstReferrer", first_referrer);
+
+        fillFieldWithValue("smujarCurrentGclid", gclid);
+        fillFieldWithValue("smujarCurrentLiFatId", li_fat_id);
+        fillFieldWithValue("smujarCurrentFBclid", fbclid);
     }
 }
 
