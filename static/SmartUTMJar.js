@@ -69,13 +69,18 @@ function writeCookieWithUTMParams(params) {
 
 function fillFieldWithValue(fieldName, fieldValue) {
     try {
-    var hf = document.getElementById(fieldName);
-    if (!hf) {
-        hf = document.getElementsByName(fieldName)[0];
-    }
-    if (hf) {
-        hf.value = fieldValue || '';
-    }
+        var hf = document.getElementById(fieldName);
+        if (hf) {
+            hf.value = fieldValue || '';
+        }
+
+        hf = document.getElementsByName(fieldName);
+        if (hf.length > 0) {
+            for (var i = 0; i < hf.length; i++) {
+                hf[i].value = fieldValue || '';
+            }
+        }
+
     }
     catch (e) {
         console.log("Did not find field " + fieldName + ". skipping...")
@@ -132,6 +137,9 @@ function fillUTMJarField() {
         fillFieldWithValue("smujarCurrentGclid", gclid);
         fillFieldWithValue("smujarCurrentLiFatId", li_fat_id);
         fillFieldWithValue("smujarCurrentFBclid", fbclid);
+    }
+    if (document.cookie.indexOf("__hstc=") >= 0) {
+        fillFieldWithValue("smujarHubspotCookie", getCookie("__hstc"));
     }
 }
 
