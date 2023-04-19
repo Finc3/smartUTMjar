@@ -2,8 +2,8 @@
 
 This is a script collection that stores utm parameters in cookie and offers a service to add them into a hidden field of a html form for submission into i.e. a CRM system.
 All visits are recorded (if properly integrated with cookie consent). The top 6 search engines are explicitly marked as organic traffic. All other visits are recorded as "referrer" with the host from which the user visited your website. 
-Besides utm parameters, the script also records the google click id, facebook click id and linkedin click id. This might be helpful for offline conversions (For example you have a dedicated sales process after signup).
-This tool helps you to track your ad revelant and analytics relevant traffic throughout your whole tool stack and not only on your website.
+Besides utm parameters, the script also records the google click id, facebook click id and linkedin click id and HubSpot tracking cookie. This might be helpful for offline conversions (For example you have a dedicated sales process after signup).
+This tool helps you to track your ad relevant and analytics relevant traffic throughout your whole tool stack and not only on your website.
 
 ## How to use it?
 
@@ -15,25 +15,26 @@ The script writes a cookie with your parameters or your google referrer. Your fo
 
 There are more parameters that can be used. Those parameters split into current and first parameters. Current fields are filled with LastTouch values and First fields are filled with the first recorded parameters from a visit.
 
- Field name   | Desctiption   |
- :-----------: | :------------|
- **smujarCurrentUTMSource** | UTM Source |
- **smujarCurrentUTMMedium** | UTM Medium |
- **smujarCurrentUTMCampaign** | UTM Campaign |
- **smujarCurrentUTMContent** | UTM Content |
- **smujarCurrentUTMTerm** | UTM Term |
- **smujarCurrentLandingPage** | Landingpage in: Current URL in the location |
- **smujarCurrentReferrer** | Current referrer |
- **smujarCurrentGclid** | Current google click id |
- **smujarCurrentLiFatId** | Current linkedin click id |
- **smujarCurrentFBclid** | Current facebook click id |
- **smujarFirstUTMSource** | First recorded UTM Source |
- **smujarFirstUTMMedium** | First recorded UTM Medium |
- **smujarFirstUTMCampaign** | First recorded UTM Campaign |
- **smujarFirstUTMContent** | First recorded UTM Content |
- **smujarFirstUTMTerm** | First recorded UTM Term |
- **smujarFirstLandingPage** | First recorded Landingpage in: Current URL in the location |
- **smujarFirstReferrer** | First recorded referrer |
+|          Field name          | Desctiption                                                |
+|:----------------------------:|:-----------------------------------------------------------|
+|  **smujarCurrentUTMSource**  | UTM Source                                                 |
+|  **smujarCurrentUTMMedium**  | UTM Medium                                                 |
+| **smujarCurrentUTMCampaign** | UTM Campaign                                               |
+| **smujarCurrentUTMContent**  | UTM Content                                                |
+|   **smujarCurrentUTMTerm**   | UTM Term                                                   |
+| **smujarCurrentLandingPage** | Landingpage in: Current URL in the location                |
+|  **smujarCurrentReferrer**   | Current referrer                                           |
+|    **smujarCurrentGclid**    | Current google click id                                    |
+|   **smujarCurrentLiFatId**   | Current linkedin click id                                  |
+|   **smujarCurrentFBclid**    | Current facebook click id                                  |
+|   **smujarFirstUTMSource**   | First recorded UTM Source                                  |
+|   **smujarFirstUTMMedium**   | First recorded UTM Medium                                  |
+|  **smujarFirstUTMCampaign**  | First recorded UTM Campaign                                |
+|  **smujarFirstUTMContent**   | First recorded UTM Content                                 |
+|    **smujarFirstUTMTerm**    | First recorded UTM Term                                    |
+|  **smujarFirstLandingPage**  | First recorded Landingpage in: Current URL in the location |
+|   **smujarFirstReferrer**    | First recorded referrer                                    |
+|   **smujarHubspotCookie**    | HubSpot tracking cookie if available                       |                      |
 
 
 When a user opens the site with the form the script tries to fill every hidden field with the ids: **smujarFirstVisitTime**, **smujarFirstVisit**, **smujarHistory**. On submit the data is transferred but the cookie will still remain in the users cookie jar.
@@ -49,7 +50,7 @@ When you submit your form the webserver will output something like this on the c
 ## The format for BI/Analytics Tools?
 
 * The format is JSON. The history will be transmitted as a ordered json list. The first visit is the last element in the list.
-* **smujarFirstVisit** -> is a string with the campaing/clickId. The format is: utm_source-utm_medium-utm_campaign-gclid
+* **smujarFirstVisit** -> is a string with the campaign/clickId. The format is: utm_source-utm_medium-utm_campaign-gclid
 * **smujarFirstVisitTime** -> timestring in the format: YYYY-MM-DTHH:MM:00Z. Timezone is always in UTC
 * **ALL OTHER PARAMETERS** -> all other parameters contain the values exactly as given in the URL. (UTMTerm send as: HelloWorld, "HelloWorld" would be put into the corresponding field)
 
