@@ -38,7 +38,10 @@ function extractCampaignParameters(params) {
     });
     if (Object.keys(result).length === 0) {
         var searchEngineDomains = ["google.", "bing.", "baidu.", "yahoo.", "ask.", "duckduckgo."]
-        var cleanedReferrer = document.referrer.replace("https://", "").replace("/","");
+        var cleanedReferrer = "";
+        if (document.referrer && document.referrer.length > 0) {
+            cleanedReferrer = new URL(document.referrer).hostname;
+        }
         var searchEngineFound = false;
         var i = 0;
         while (!searchEngineFound && i < searchEngineDomains.length) {
