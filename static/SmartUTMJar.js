@@ -51,8 +51,11 @@ function extractCampaignParameters(params) {
         if (searchEngineFound) {
             result = {"utm_source": cleanedReferrer, "utm_medium": "organic"};
         }
-        else {
+        else if (cleanedReferrer.length > 0 && !searchEngineFound) {
             result = {"utm_source": cleanedReferrer, "utm_medium": "referral"};
+        }
+        else {
+            result = {"utm_source": "(direct)", "utm_medium": "(none)"};
         }
     }
     result.visit = visitedDate();
