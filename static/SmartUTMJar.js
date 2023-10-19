@@ -96,23 +96,23 @@ function fillFieldWithValue(fieldName, fieldValue) {
 function fillUTMJarField() {
     if (document.cookie.indexOf("smartUTMJar=") >= 0) {
 
-        var cookie = JSON.parse(getCookie("smartUTMJar"));
-        var utms = cookie[cookie.length - 1].utm_source;
-        var utmm = cookie[cookie.length - 1].utm_medium;
-        var gclid = cookie[cookie.length - 1].gclid;
-        var li_fat_id = cookie[cookie.length - 1].li_fat_id;
-        var fbclid = cookie[cookie.length - 1].fbclid;
-
-        var utmc = cookie[cookie.length - 1].utm_campaign;
-        var utmcontent = cookie[cookie.length - 1].utm_content;
-        var utmterm = cookie[cookie.length - 1].utm_term;
-        var firstVisitTime = cookie[cookie.length - 1].visit;
-        var referrer = cookie[cookie.length - 1].referrer;
-        var landingPage = cookie[cookie.length - 1].landingPage;
-
         fillFieldWithValue("smujarHistory", getCookie("smartUTMJar"));
-        fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || '')) + (("-"+li_fat_id) || '')
-        fillFieldWithValue("smujarFirstVisitTime", firstVisitTime);
+        var cookie = JSON.parse(getCookie("smartUTMJar"));
+
+
+
+        var utms = cookie[0].utm_source;
+        var utmm = cookie[0].utm_medium;
+        var gclid = cookie[0].gclid;
+        var li_fat_id = cookie[0].li_fat_id;
+        var fbclid = cookie[0].fbclid;
+
+        var utmc = cookie[0].utm_campaign;
+        var utmcontent = cookie[0].utm_content;
+        var utmterm = cookie[0].utm_term;
+        var firstVisitTime = cookie[0].visit;
+        var referrer = cookie[0].referrer;
+        var landingPage = cookie[0].landingPage;
 
         fillFieldWithValue("smujarCurrentUTMSource", utms);
         fillFieldWithValue("smujarCurrentUTMMedium", utmm);
@@ -123,14 +123,20 @@ function fillUTMJarField() {
         fillFieldWithValue("smujarCurrentLandingPage", landingPage);
         fillFieldWithValue("smujarCurrentReferrer", referrer);
 
-        var first_utms = cookie[0].utm_source;
-        var first_utmm = cookie[0].utm_medium;
-        var first_utmc = cookie[0].utm_campaign;
-        var first_utmcontent = cookie[0].utm_content;
-        var first_utmterm = cookie[0].utm_term;
-        var first_landingpage = cookie[0].landingPage;
-        var first_referrer = cookie[0].referrer;
+        fillFieldWithValue("smujarCurrentGclid", gclid);
+        fillFieldWithValue("smujarCurrentLiFatId", li_fat_id);
+        fillFieldWithValue("smujarCurrentFBclid", fbclid);
 
+        var first_utms = cookie[cookie.length - 1].utm_source;
+        var first_utmm = cookie[cookie.length - 1].utm_medium;
+        var first_utmc = cookie[cookie.length - 1].utm_campaign;
+        var first_utmcontent = cookie[cookie.length - 1].utm_content;
+        var first_utmterm = cookie[cookie.length - 1].utm_term;
+        var first_landingpage = cookie[cookie.length - 1].landingPage;
+        var first_referrer = cookie[cookie.length - 1].referrer;
+
+        fillFieldWithValue("smujarFirstVisit", (utms || '') + (("-"+utmm) || '') + (("-"+gclid) || '') + (("-"+utmc) || '') + (("-"+utmcontent) || '') + (("-"+utmterm) || '')) + (("-"+li_fat_id) || '')
+        fillFieldWithValue("smujarFirstVisitTime", firstVisitTime);
         fillFieldWithValue("smujarFirstUTMSource", first_utms);
         fillFieldWithValue("smujarFirstUTMMedium", first_utmm);
         fillFieldWithValue("smujarFirstUTMCampaign", first_utmc);
@@ -140,9 +146,7 @@ function fillUTMJarField() {
         fillFieldWithValue("smujarFirstLandingPage", first_landingpage);
         fillFieldWithValue("smujarFirstReferrer", first_referrer);
 
-        fillFieldWithValue("smujarCurrentGclid", gclid);
-        fillFieldWithValue("smujarCurrentLiFatId", li_fat_id);
-        fillFieldWithValue("smujarCurrentFBclid", fbclid);
+
     }
     if (document.cookie.indexOf("__hstc=") >= 0) {
         fillFieldWithValue("smujarHubspotCookie", getCookie("__hstc"));
